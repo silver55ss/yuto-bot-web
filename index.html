@@ -23,7 +23,7 @@
 
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>أهلاً، أنا <span class="highlight">مطور ويب</span></h1>
+           <h1>أهلاً، أنا <span class="highlight type-text"></span></h1>
             <p>أقوم ببناء مواقع وتطبيقات عصرية بلمسة إبداعية.</p>
             <a href="#projects" class="btn">شاهد أعمالي</a>
         </div>
@@ -50,6 +50,30 @@
     <footer>
         <p>جميع الحقوق محفوظة &copy; 2026</p>
     </footer>
+<script>
+    const textElement = document.querySelector('.type-text');
+    const texts = ['مطور ويب', 'صانع بوتات', 'محب للأنمي', 'مبرمج طموح'];
+    let count = 0;
+    let index = 0;
+    let currentText = '';
+    let letter = '';
 
+    (function type() {
+        if (count === texts.length) {
+            count = 0;
+        }
+        currentText = texts[count];
+        letter = currentText.slice(0, ++index);
+
+        textElement.textContent = letter;
+        if (letter.length === currentText.length) {
+            count++;
+            index = 0;
+            setTimeout(type, 2000); // انتظر ثانيتين قبل الكلمة التالية
+        } else {
+            setTimeout(type, 100); // سرعة الكتابة
+        }
+    })();
+</script>
 </body>
 </html>

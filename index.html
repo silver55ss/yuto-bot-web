@@ -3,77 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio | Yuta Style</title>
+    <title>Yuta Bot | AI & APIs</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <header>
         <nav>
-            <div class="logo">YUTA.DEV</div>
+            <div class="logo">YUTA<span style="color:var(--accent-color)">.BOT</span></div>
             <ul class="nav-links">
                 <li><a href="#home">الرئيسية</a></li>
-                <li><a href="#about">عني</a></li>
-                <li><a href="#projects">مشاريعي</a></li>
-                <li><a href="#contact">تواصل</a></li>
+                <li><a href="#features">المميزات</a></li>
+                <li><a href="#api">APIs للمطورين</a></li>
+                <li><a href="#dev">المطور</a></li>
             </ul>
         </nav>
     </header>
 
     <section id="home" class="hero">
         <div class="hero-content">
-           <h1>أهلاً، أنا <span class="highlight type-text"></span></h1>
-            <p>أقوم ببناء مواقع وتطبيقات عصرية بلمسة إبداعية.</p>
-            <a href="#projects" class="btn">شاهد أعمالي</a>
+            <h1>قوة <span class="highlight">اللعنة البرمجية</span></h1>
+            <p class="type-text">بوت واتساب متكامل - أدوات للمطورين - ذكاء اصطناعي</p>
+            <div class="buttons">
+                <a href="#api" class="btn">تصفح الـ APIs</a>
+                <a href="https://wa.me/YOUR_NUMBER" class="btn btn-outline">جرب البوت الآن <i class="fab fa-whatsapp"></i></a>
+            </div>
         </div>
     </section>
 
-    <section id="projects" class="section">
-        <h2>أحدث المشاريع</h2>
-        <div class="projects-grid">
-            <div class="card">
-                <h3>Yuta Bot</h3>
-                <p>بوت واتساب متطور مبني باستخدام Node.js ومكتبة Baileys.</p>
+    <section id="features" class="section">
+        <h2 class="section-title">قدرات Yuta Bot</h2>
+        <div class="grid-container">
+            <div class="feature-card">
+                <i class="fas fa-robot icon"></i>
+                <h3>ذكاء اصطناعي</h3>
+                <p>توليد نصوص وتحليل صور باستخدام أحدث نماذج AI.</p>
             </div>
-            <div class="card">
-                <h3>Web Game</h3>
-                <p>لعبة ويب تفاعلية ثلاثية الأبعاد مستوحاة من الأنمي.</p>
+            <div class="feature-card">
+                <i class="fas fa-image icon"></i>
+                <h3>صانع الملصقات</h3>
+                <p>تحويل الصور والفيديوهات إلى ملصقات واتساب بدقة عالية.</p>
             </div>
-            <div class="card">
-                <h3>Portfolio</h3>
-                <p>الموقع الشخصي الذي تتصفحه الآن.</p>
+            <div class="feature-card">
+                <i class="fas fa-shield-alt icon"></i>
+                <h3>حماية المجموعات</h3>
+                <p>أدوات إدارية قوية لحماية المجموعات من السبام.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="api" class="section dark-section">
+        <h2 class="section-title">مركز الـ API للمطورين</h2>
+        <p style="text-align:center; color:#888; margin-bottom:30px;">استخدم هذه الروابط البرمجية في مشاريعك الخاصة مجاناً</p>
+        
+        <div class="api-container">
+            <div class="api-box">
+                <div class="api-header">
+                    <span class="method get">GET</span>
+                    <span class="endpoint">/api/sticker-maker</span>
+                </div>
+                <p class="api-desc">تحويل الصور إلى ملصقات تلقائياً.</p>
+                <div class="code-block">
+                    <code>https://api.yutabot.com/sticker?url={image_url}</code>
+                    <button class="copy-btn"><i class="far fa-copy"></i></button>
+                </div>
+            </div>
+
+            <div class="api-box">
+                <div class="api-header">
+                    <span class="method get">GET</span>
+                    <span class="endpoint">/api/anime-search</span>
+                </div>
+                <p class="api-desc">البحث عن معلومات الأنمي والصور.</p>
+                <div class="code-block">
+                    <code>https://api.yutabot.com/anime?query={name}</code>
+                    <button class="copy-btn"><i class="far fa-copy"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="dev" class="section">
+        <div class="dev-card">
+            <div class="dev-info">
+                <h2>عن المطور</h2>
+                <p>أنا مبرمج شغوف بتطوير البوتات وتطبيقات الويب. أستخدم Node.js و Python لبناء أدوات تخدم المجتمع.</p>
+                <div class="socials">
+                    <a href="#"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="#"><i class="fab fa-telegram"></i> Telegram</a>
+                </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>جميع الحقوق محفوظة &copy; 2026</p>
+        <p>Developed with <i class="fas fa-heart" style="color:var(--accent-color)"></i> by Yuta Dev &copy; 2026</p>
     </footer>
-<script>
-    const textElement = document.querySelector('.type-text');
-    const texts = ['مطور ويب', 'صانع بوتات', 'محب للأنمي', 'مبرمج طموح'];
-    let count = 0;
-    let index = 0;
-    let currentText = '';
-    let letter = '';
 
-    (function type() {
-        if (count === texts.length) {
-            count = 0;
-        }
-        currentText = texts[count];
-        letter = currentText.slice(0, ++index);
-
-        textElement.textContent = letter;
-        if (letter.length === currentText.length) {
-            count++;
-            index = 0;
-            setTimeout(type, 2000); // انتظر ثانيتين قبل الكلمة التالية
-        } else {
-            setTimeout(type, 100); // سرعة الكتابة
-        }
-    })();
-</script>
 </body>
 </html>

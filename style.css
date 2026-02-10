@@ -1,12 +1,12 @@
 /* =========================================
-   ألوان الفرفشة الداكنة (Neon Night Theme)
+   1. المتغيرات والألوان (Cyberpunk Theme)
    ========================================= */
 :root {
-    --bg-dark: #0f172a;       /* كحلي غامق جداً */
+    --bg-dark: #0f172a;       /* كحلي غامق */
     --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
     
-    --neon-pink: #f472b6;     /* وردي فاقع */
-    --neon-blue: #38bdf8;     /* سماوي مشع */
+    --neon-pink: #f472b6;     /* وردي */
+    --neon-blue: #38bdf8;     /* سماوي */
     --neon-purple: #a855f7;   /* بنفسجي */
     
     --glass: rgba(255, 255, 255, 0.05);
@@ -27,7 +27,9 @@ body {
     min-height: 100vh;
 }
 
-/* فقاعات الخلفية */
+/* =========================================
+   2. الفقاعات الخلفية
+   ========================================= */
 .bubbles-container {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -43,12 +45,14 @@ body {
     animation: rise 15s infinite ease-in;
 }
 @keyframes rise {
-    0% { bottom: -100px; transform: translateX(0); }
-    50% { transform: translateX(100px); }
-    100% { bottom: 100%; transform: translateX(-100px); }
+    0% { bottom: -100px; transform: translateX(0); opacity: 0; }
+    50% { opacity: 0.5; transform: translateX(50px); }
+    100% { bottom: 100%; transform: translateX(-50px); opacity: 0; }
 }
 
-/* القائمة الزجاجية */
+/* =========================================
+   3. القائمة العلوية
+   ========================================= */
 header {
     position: fixed;
     top: 20px; left: 50%; transform: translateX(-50%);
@@ -57,7 +61,7 @@ header {
 }
 
 .glass-nav {
-    background: rgba(15, 23, 42, 0.8);
+    background: rgba(15, 23, 42, 0.85);
     backdrop-filter: blur(15px);
     padding: 15px 30px;
     border-radius: 50px;
@@ -72,26 +76,34 @@ header {
     font-family: var(--font-heading);
     font-size: 1.5rem;
     font-weight: bold;
-    letter-spacing: 1px;
+    color: #fff;
 }
 
 .nav-links { display: flex; gap: 20px; }
-.nav-links a {
-    color: #cbd5e1;
-    transition: 0.3s;
-    font-weight: 500;
-}
+.nav-links a { color: #cbd5e1; transition: 0.3s; font-weight: 500; }
 .nav-links a:hover { color: var(--neon-pink); text-shadow: 0 0 10px var(--neon-pink); }
 
-/* الهيرو */
+/* =========================================
+   4. الهيرو (الواجهة الرئيسية)
+   ========================================= */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 0 20px;
-    margin-top: 50px; /* مسافة للقائمة */
+    padding: 120px 20px 50px; /* مسافة من الأعلى عشان القائمة */
+}
+
+/* حركة الظهور الفورية للنصوص العلوية */
+.hero-content {
+    animation: fadeInUp 1s ease-out forwards;
+    opacity: 0; /* يبدأ مخفي ويظهر بالأنيميشن */
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .badge-glow {
@@ -103,6 +115,7 @@ header {
     margin-bottom: 20px;
     border: 1px solid rgba(168, 85, 247, 0.3);
     font-size: 0.9rem;
+    font-weight: bold;
 }
 
 .hero h1 {
@@ -118,12 +131,23 @@ header {
     -webkit-text-fill-color: transparent;
 }
 
+/* تنسيق النص المتحرك */
 .type-effect {
     font-size: 1.5rem;
     color: #94a3b8;
     margin-bottom: 40px;
-    min-height: 30px;
+    min-height: 1.6em; /* حجز مكان للنص عشان ما ينط */
+    font-weight: bold;
+    display: block;
 }
+
+/* مؤشر الكتابة */
+.type-effect::after {
+    content: '|';
+    color: var(--neon-pink);
+    animation: blink 0.7s infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
 
 .buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
 
@@ -142,7 +166,6 @@ header {
     color: #fff;
     box-shadow: 0 0 20px rgba(244, 114, 182, 0.4);
 }
-
 .btn-primary:hover { transform: translateY(-5px); box-shadow: 0 0 40px rgba(244, 114, 182, 0.6); }
 
 .btn-secondary {
@@ -152,7 +175,9 @@ header {
 }
 .btn-secondary:hover { border-color: var(--neon-blue); color: var(--neon-blue); }
 
-/* البطاقات */
+/* =========================================
+   5. البطاقات (الظهور عند السكرول)
+   ========================================= */
 .section { padding: 100px 5%; }
 .section-title {
     text-align: center;
@@ -174,8 +199,19 @@ header {
     border-radius: 20px;
     border: 1px solid var(--border);
     text-align: center;
-    transition: transform 0.1s; /* JS Tilt */
+    transition: transform 0.1s;
     transform-style: preserve-3d;
+    
+    /* إعدادات السكرول */
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* الكلاس الذي سيضيفه الجافاسكربت لإظهار البطاقة */
+.card.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .icon-box {
@@ -189,8 +225,12 @@ header {
 .card h3 { font-family: var(--font-heading); margin-bottom: 15px; font-size: 1.4rem; }
 .card p { color: #94a3b8; }
 
-/* API Section */
-.api-wrapper { max-width: 800px; margin: 0 auto; }
+/* =========================================
+   6. API Section
+   ========================================= */
+.api-wrapper { max-width: 800px; margin: 0 auto; opacity: 0; transform: translateY(50px); transition: 1s; }
+.api-wrapper.visible { opacity: 1; transform: translateY(0); }
+
 .api-card {
     background: #000;
     border-radius: 15px;
@@ -198,7 +238,6 @@ header {
     padding: 25px;
     position: relative;
 }
-/* خط نيون جانبي */
 .api-card::before {
     content: ''; position: absolute; top: 10%; right: 0;
     width: 4px; height: 80%;
@@ -222,7 +261,6 @@ header {
     border: 1px solid #222;
     direction: ltr;
 }
-
 .code-box code {
     color: var(--neon-pink);
     font-family: var(--font-code);
@@ -231,11 +269,12 @@ header {
     margin-right: 15px;
     scrollbar-width: none;
 }
-
 .copy-btn { background: transparent; border: none; color: #666; cursor: pointer; font-size: 1.2rem; }
 .copy-btn:hover { color: var(--neon-blue); }
 
-/* المطور */
+/* =========================================
+   7. المطور والفوتر
+   ========================================= */
 .dev-card {
     text-align: center;
     background: linear-gradient(145deg, #1e1b4b, #0f172a);
@@ -244,7 +283,9 @@ header {
     max-width: 600px;
     margin: 0 auto;
     border: 1px solid var(--border);
+    opacity: 0; transform: translateY(50px); transition: 1s;
 }
+.dev-card.visible { opacity: 1; transform: translateY(0); }
 
 .profile-glow {
     width: 100px; height: 100px;
@@ -267,21 +308,8 @@ header {
 }
 .socials a:hover { background: var(--neon-pink); transform: scale(1.1); }
 
-/* Animations Classes */
-/* مهم: نجعل العنصر شفافاً في البداية */
-.reveal { 
-    opacity: 0; 
-    transform: translateY(30px); 
-    transition: 1s all ease; 
-}
-
-/* عندما نضيف كلاس active يظهر العنصر */
-.reveal.active { 
-    opacity: 1; 
-    transform: translateY(0); 
-}
-
-.pulse { animation: pulse 1.5s infinite; color: var(--neon-pink); }
+footer { text-align: center; padding: 40px; color: #666; margin-top: 50px; }
+footer i { color: var(--neon-pink); animation: pulse 1s infinite; }
 @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
 
 /* الموبايل */
@@ -289,5 +317,4 @@ header {
     header { width: 95%; top: 10px; }
     .nav-links { display: none; }
     .hero h1 { font-size: 3rem; }
-    .card { padding: 30px 20px; }
 }

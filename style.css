@@ -1,16 +1,24 @@
 /* =========================================
-   1. إعدادات عامة ومتغيرات الألوان
+   1. إعدادات عامة (Cyber-Glass Theme)
    ========================================= */
 :root {
-    --bg-color: #050505;        /* أسود عميق */
-    --card-bg: #111111;         /* رمادي داكن للبطاقات */
-    --text-color: #e0e0e0;      /* أبيض مريح */
-    --accent-color: #9d4edd;    /* البنفسجي (طاقة يوتا) */
-    --accent-glow: rgba(157, 78, 221, 0.4);
-    --code-bg: #1e1e1e;
+    --bg-color: #09090b;       /* كحلي غامق جداً */
+    --card-bg: rgba(255, 255, 255, 0.03); /* زجاجي شفاف */
+    --text-color: #ffffff;
+    --text-muted: #94a3b8;
+    
+    /* تدرج لوني هولوغرافي */
+    --gradient-main: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+    --gradient-text: linear-gradient(135deg, #00d2ff 0%, #ff6b6b 100%);
+    
     --success: #00e676;
     --font-main: 'Tajawal', sans-serif;
     --font-code: 'Fira Code', monospace;
+    
+    /* تأثيرات الزجاج */
+    --glass-blur: blur(16px);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+    --shadow-soft: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
 * {
@@ -30,68 +38,71 @@ body {
     color: var(--text-color);
     font-family: var(--font-main);
     line-height: 1.6;
-    overflow-x: hidden; /* لمنع التمرير الجانبي */
+    overflow-x: hidden;
+    /* خلفية متدرجة ثابتة خلف المحتوى */
+    background-image: 
+        radial-gradient(circle at 0% 0%, rgba(0, 210, 255, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 100% 100%, rgba(255, 107, 107, 0.08) 0%, transparent 40%);
+    background-attachment: fixed;
 }
 
 /* =========================================
-   2. القائمة العلوية (Header & Nav)
+   2. القائمة العلوية العائمة (Floating Nav)
    ========================================= */
 header {
     position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 15px 8%;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+    padding: 10px 30px;
+    
+    /* تصميم الكبسولة الزجاجية */
+    background: rgba(9, 9, 11, 0.7);
+    backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    border-radius: 50px; /* دائري الجوانب */
+    box-shadow: var(--shadow-soft);
+    
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(5, 5, 5, 0.85);
-    backdrop-filter: blur(10px);
     z-index: 1000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #fff;
-    letter-spacing: 1px;
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 2px;
     font-family: var(--font-code);
+    /* تلوين النص بتدرج لوني */
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .nav-links {
     display: flex;
-    gap: 30px;
+    gap: 25px;
 }
 
 .nav-links a {
     color: var(--text-color);
     font-weight: 500;
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     transition: 0.3s;
-    position: relative;
+    opacity: 0.8;
 }
 
 .nav-links a:hover {
-    color: var(--accent-color);
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    right: 0;
-    background-color: var(--accent-color);
-    transition: width 0.3s;
-}
-
-.nav-links a:hover::after {
-    width: 100%;
+    opacity: 1;
+    color: #00d2ff; /* لون سماوي */
+    text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
 }
 
 /* =========================================
-   3. القسم الرئيسي (Hero Section)
+   3. القسم الرئيسي (Hero - Futuristic)
    ========================================= */
 .hero {
     height: 100vh;
@@ -99,27 +110,31 @@ header {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: radial-gradient(circle at 50% 50%, #1a0b2e 0%, var(--bg-color) 70%);
     padding: 0 20px;
+    position: relative;
 }
 
 .hero h1 {
-    font-size: 4rem;
+    font-size: 5rem; /* خط ضخم */
     margin-bottom: 20px;
-    color: #fff;
-    direction: ltr; /* للأكواد والنصوص الإنجليزية */
+    font-weight: 900;
+    line-height: 1.1;
+    direction: ltr;
 }
 
 .highlight {
-    color: var(--accent-color);
-    text-shadow: 0 0 20px var(--accent-glow);
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: block; /* لجعله في سطر منفصل إذا أردت، أو اتركه inline */
 }
 
 .type-text {
-    font-size: 1.2rem;
-    color: #aaa;
-    margin-bottom: 40px;
-    min-height: 24px;
+    font-size: 1.3rem;
+    color: var(--text-muted);
+    margin-bottom: 50px;
+    font-weight: 300;
+    letter-spacing: 1px;
 }
 
 .buttons {
@@ -130,115 +145,128 @@ header {
 }
 
 .btn {
-    padding: 12px 30px;
-    border-radius: 30px;
+    padding: 15px 35px;
+    border-radius: 12px;
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
+    letter-spacing: 0.5px;
 }
 
+/* الزر الأساسي بتدرج لوني */
 .btn:not(.btn-outline) {
-    background: var(--accent-color);
+    background: var(--gradient-main);
     color: #fff;
-    box-shadow: 0 0 15px var(--accent-glow);
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 210, 255, 0.3);
 }
 
 .btn:not(.btn-outline):hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0 25px rgba(157, 78, 221, 0.8);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 210, 255, 0.5);
 }
 
 .btn-outline {
     background: transparent;
-    border: 2px solid var(--accent-color);
-    color: var(--accent-color);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
 }
 
 .btn-outline:hover {
-    background: var(--accent-color);
-    color: #fff;
-    transform: translateY(-3px);
+    border-color: #00d2ff;
+    color: #00d2ff;
+    background: rgba(0, 210, 255, 0.05);
 }
 
 /* =========================================
-   4. قسم المميزات (تم الإصلاح هنا)
+   4. البطاقات الزجاجية (Features & Grid)
    ========================================= */
 .section {
-    padding: 80px 8%;
+    padding: 100px 8%;
 }
 
-/* إصلاح مشكلة العنوان المختفي */
 .section-title {
     text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 50px;
-    position: relative;
-    /* الطريقة الآمنة للتوسط بدلاً من left/transform */
+    font-size: 3rem;
+    margin-bottom: 60px;
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
+    /* تلوين العنوان */
+    background: linear-gradient(to right, #fff, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.section-title::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 4px;
-    background: var(--accent-color);
-    margin: 10px auto 0;
-    border-radius: 2px;
-}
-
-/* تحسين الشبكة لتستوعب العدد الجديد */
 .grid-container {
     display: grid;
-    /* تجعل العناصر تأخذ مساحة متساوية وتلتف تلقائياً */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
     justify-content: center;
 }
 
 .feature-card {
+    /* التصميم الزجاجي */
     background: var(--card-bg);
+    backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
     padding: 40px 30px;
-    border-radius: 15px;
+    border-radius: 20px; /* زوايا دائرية أكثر */
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: 0.3s;
-    /* لجعل البطاقات بنفس الطول */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* حركة نطاطة */
+    position: relative;
+    overflow: hidden;
+}
+
+/* تأثير التوهج عند التحويم */
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 100%);
+    opacity: 0;
+    transition: 0.4s;
 }
 
 .feature-card:hover {
-    border-color: var(--accent-color);
-    transform: translateY(-10px);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    transform: translateY(-10px) scale(1.02);
+    border-color: rgba(0, 210, 255, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.feature-card:hover::before {
+    opacity: 1;
 }
 
 .feature-card .icon {
-    font-size: 3rem;
-    color: var(--accent-color);
-    margin-bottom: 20px;
+    font-size: 3.5rem;
+    margin-bottom: 25px;
+    /* أيقونات ملونة بتدرج */
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .feature-card h3 {
     margin-bottom: 15px;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    color: #fff;
 }
 
 .feature-card p {
-    color: #888;
-    line-height: 1.7;
+    color: var(--text-muted);
+    font-size: 0.95rem;
 }
 
 /* =========================================
-   5. قسم الـ APIs
+   5. الـ APIs (Cyber Terminal Style)
    ========================================= */
 .dark-section {
-    background-color: #020202;
+    /* لا نحتاج لون خلفية مختلف لأن الخلفية العامة متدرجة */
+    /* لكن سنعطيه مساحة أكبر */
+    padding-top: 120px;
+    padding-bottom: 120px;
 }
 
 .api-container {
@@ -246,114 +274,118 @@ header {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 30px;
 }
 
 .api-box {
-    background: #0f0f0f;
-    border: 1px solid #333;
-    border-right: 4px solid var(--accent-color);
-    border-radius: 8px;
-    padding: 25px;
+    background: rgba(15, 23, 42, 0.6); /* لون كحلي غامق شفاف */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(56, 189, 248, 0.2); /* حدود زرقاء خفيفة */
+    border-radius: 12px;
+    padding: 30px;
     position: relative;
-    overflow: hidden;
+    transition: 0.3s;
+}
+
+.api-box:hover {
+    border-color: rgba(56, 189, 248, 0.6);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.1);
 }
 
 .api-header {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 15px;
 }
 
 .method {
     font-family: var(--font-code);
     font-weight: bold;
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-size: 0.85rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
 }
 
 .method.get {
-    background: rgba(0, 230, 118, 0.15);
-    color: var(--success);
-    border: 1px solid rgba(0, 230, 118, 0.3);
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981; /* أخضر زمردي */
+    border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
 .endpoint {
     font-family: var(--font-code);
-    color: #fff;
-    font-weight: bold;
+    color: #e2e8f0;
+    font-weight: 600;
     font-size: 1.1rem;
-    direction: ltr; /* ليظهر الرابط بشكل صحيح */
+    direction: ltr;
 }
 
 .api-desc {
-    color: #aaa;
-    margin-bottom: 15px;
-    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    font-size: 1rem;
 }
 
 .code-block {
-    background: var(--code-bg);
-    padding: 15px;
-    border-radius: 6px;
+    background: #020617; /* أسود حالك للكود */
+    padding: 20px;
+    border-radius: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-family: var(--font-code);
-    color: #fab1a0;
-    border: 1px solid #333;
-    direction: ltr; /* الكود دائماً من اليسار لليمين */
-}
-
-.code-block code {
-    white-space: nowrap;
-    overflow-x: auto;
-    padding-bottom: 2px;
-}
-
-.code-block code::-webkit-scrollbar {
-    height: 4px;
-}
-.code-block code::-webkit-scrollbar-thumb {
-    background: var(--accent-color);
+    color: #38bdf8; /* أزرق سماوي للكود */
+    border: 1px solid #1e293b;
+    direction: ltr;
 }
 
 .copy-btn {
-    background: transparent;
-    border: none;
-    color: #888;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-left: 15px;
-    transition: color 0.3s;
+    padding: 8px;
+    border-radius: 6px;
+    transition: 0.3s;
 }
 
 .copy-btn:hover {
-    color: var(--accent-color);
+    background: #38bdf8;
+    color: #000;
 }
 
 /* =========================================
-   6. المطور والفوتر والتجاوب
+   6. المطور والفوتر
    ========================================= */
 .dev-card {
-    background: linear-gradient(45deg, #111, #1a0b2e);
-    padding: 50px;
-    border-radius: 20px;
+    /* تصميم بطاقة الهوية الزجاجية */
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 60px;
+    border-radius: 30px;
     text-align: center;
-    border: 1px solid #333;
     max-width: 800px;
     margin: 0 auto;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
 }
 
 .dev-info h2 {
     margin-bottom: 20px;
-    color: var(--accent-color);
+    font-size: 2.5rem;
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .socials {
-    margin-top: 30px;
+    margin-top: 40px;
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -361,46 +393,60 @@ header {
 
 .socials a {
     color: #fff;
-    font-size: 1.2rem;
-    border: 1px solid #333;
-    padding: 10px 20px;
-    border-radius: 50px;
+    font-size: 1.1rem;
+    padding: 12px 25px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
     transition: 0.3s;
-    background: #000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .socials a:hover {
-    background: var(--accent-color);
-    border-color: var(--accent-color);
-    transform: translateY(-3px);
+    background: #fff;
+    color: #000; /* عكس الألوان عند التحويم */
+    transform: translateY(-5px);
 }
 
 footer {
     text-align: center;
-    padding: 30px;
-    background: #000;
-    color: #666;
-    border-top: 1px solid #222;
-    margin-top: 50px;
+    padding: 40px;
+    background: transparent; /* جعل الفوتر شفافاً */
+    color: var(--text-muted);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    margin-top: 80px;
+    font-size: 0.9rem;
 }
 
-/* للجوال */
+/* =========================================
+   7. التجاوب (Mobile)
+   ========================================= */
 @media (max-width: 768px) {
     header {
-        padding: 15px 20px;
+        width: 95%; /* تكبير عرض القائمة على الجوال */
+        padding: 10px 20px;
+        top: 10px;
     }
+    
     .nav-links {
-        display: none;
+        display: none; /* إخفاء القائمة مؤقتاً */
     }
+
     .hero h1 {
-        font-size: 2.5rem;
+        font-size: 3rem; /* تصغير الخط العملاق */
     }
-    .code-block {
-        flex-direction: column;
-        gap: 10px;
-        align-items: flex-end;
+    
+    .section-title {
+        font-size: 2rem;
     }
-    .code-block code {
-        width: 100%;
+
+    .dev-card {
+        padding: 30px;
+    }
+    
+    .socials {
+        flex-direction: column; /* الأزرار فوق بعضها في الجوال */
     }
 }

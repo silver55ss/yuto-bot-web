@@ -1,20 +1,23 @@
 /* =========================================
-   1. إعدادات عامة (Modern Midnight Theme)
+   1. إعدادات "ساحر الفراغ" (Void Sorcerer Theme)
    ========================================= */
 :root {
-    --bg-color: #0f172a;       /* كحلي غامق جداً (Slate 900) */
-    --card-bg: #1e293b;        /* كحلي أفتح قليلاً للبطاقات */
-    --text-color: #f1f5f9;     /* أبيض ثلجي */
-    --text-muted: #94a3b8;     /* رمادي مزرق */
+    --bg-void: #020204;        /* أسود الفراغ */
+    --glass-surface: rgba(255, 255, 255, 0.03); /* سطح زجاجي خافت */
+    --border-subtle: rgba(255, 255, 255, 0.08); /* حدود بالكاد ترى */
     
-    /* تدرج لوني عصري (أزرق سماوي إلى بنفسجي) */
-    --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-    --accent-color: #60a5fa;   /* أزرق فاتح */
+    --text-primary: #ffffff;
+    --text-secondary: #a3a3a3;
+    
+    /* طاقة اللعنة الأنيقة (بنفسجي ملكي) */
+    --cursed-glow: #7c3aed;    
+    --cursed-light: #a78bfa;
     
     --font-main: 'Tajawal', sans-serif;
     --font-code: 'Fira Code', monospace;
     
-    --shadow-card: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    /* تدرج لوني للنصوص */
+    --gradient-text: linear-gradient(to bottom, #fff 40%, #a78bfa 100%);
 }
 
 * {
@@ -29,59 +32,74 @@
 html { scroll-behavior: smooth; }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    background-color: var(--bg-void);
+    color: var(--text-primary);
     font-family: var(--font-main);
-    line-height: 1.6;
+    line-height: 1.7;
     overflow-x: hidden;
+    /* إضاءة محيطية خافتة من الأعلى */
+    background-image: radial-gradient(circle at 50% -20%, rgba(124, 58, 237, 0.15), transparent 60%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
+/* شريط التمرير المخصص (فخم) */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-void); }
+::-webkit-scrollbar-thumb { 
+    background: #333; 
+    border-radius: 4px; 
+}
+::-webkit-scrollbar-thumb:hover { background: var(--cursed-glow); }
+
 /* =========================================
-   2. القائمة العلوية (Clean & Modern)
+   2. القائمة (Minimalist Luxury)
    ========================================= */
 header {
     position: fixed;
     top: 0;
     width: 100%;
-    padding: 15px 8%;
+    padding: 25px 8%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(15, 23, 42, 0.95); /* خلفية شبه شفافة */
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(2, 2, 4, 0.8); /* شفافية عالية */
+    backdrop-filter: blur(20px);      /* تمويه قوي */
+    border-bottom: 1px solid var(--border-subtle);
     z-index: 1000;
 }
 
 .logo {
-    font-size: 1.6rem;
-    font-weight: 800;
+    font-size: 1.4rem;
+    font-weight: 300; /* خط رفيع للأناقة */
+    letter-spacing: 4px;
     color: #fff;
     font-family: var(--font-code);
+    text-transform: uppercase;
 }
 
 .logo span {
-    background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--cursed-light);
+    text-shadow: 0 0 15px rgba(124, 58, 237, 0.5);
 }
 
-.nav-links { display: flex; gap: 30px; }
+.nav-links { display: flex; gap: 40px; }
 
 .nav-links a {
-    color: var(--text-muted);
-    font-weight: 500;
-    transition: 0.3s;
-    font-size: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: 0.4s;
+    letter-spacing: 1px;
 }
 
 .nav-links a:hover {
     color: #fff;
-    transform: translateY(-2px);
+    text-shadow: 0 0 10px var(--cursed-glow);
 }
 
 /* =========================================
-   3. الواجهة الرئيسية (Hero Section)
+   3. الواجهة (Ethereal Hero)
    ========================================= */
 .hero {
     height: 100vh;
@@ -90,277 +108,291 @@ header {
     align-items: center;
     text-align: center;
     padding: 0 20px;
-    /* خلفية متدرجة خفيفة جداً */
-    background: radial-gradient(circle at top, #1e1b4b 0%, var(--bg-color) 60%);
+    position: relative;
 }
 
 .hero h1 {
-    font-size: 3.8rem;
-    font-weight: 800;
-    margin-bottom: 20px;
+    font-size: 4rem;
+    font-weight: 200; /* رفيع جداً وفخم */
+    margin-bottom: 25px;
     line-height: 1.2;
-}
-
-.highlight {
-    background: var(--primary-gradient);
+    background: var(--gradient-text);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
+.highlight { font-weight: 700; } /* التمييز يكون سميكاً */
+
 .type-text {
-    font-size: 1.25rem;
-    color: var(--text-muted);
-    margin-bottom: 40px;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 50px;
+    font-family: var(--font-code);
+    letter-spacing: 2px;
+    opacity: 0.8;
 }
 
-.buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+.buttons { display: flex; gap: 25px; justify-content: center; }
 
 .btn {
-    padding: 14px 35px;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 1rem;
+    padding: 14px 40px;
+    border-radius: 2px; /* حواف حادة قليلاً للأناقة */
+    font-size: 0.9rem;
     cursor: pointer;
-    transition: all 0.3s ease;
-    border: none;
+    transition: all 0.5s ease;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
 }
 
-/* زر التدرج اللوني */
+/* زر التوهج */
 .btn:not(.btn-outline) {
-    background: var(--primary-gradient);
+    background: transparent;
+    border: 1px solid var(--cursed-glow);
     color: #fff;
-    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+    box-shadow: 0 0 15px rgba(124, 58, 237, 0.2);
 }
 
 .btn:not(.btn-outline):hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.6);
+    background: var(--cursed-glow);
+    box-shadow: 0 0 40px rgba(124, 58, 237, 0.6);
 }
 
 .btn-outline {
     background: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    color: #fff;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
 }
 
 .btn-outline:hover {
-    border-color: var(--accent-color);
-    background: rgba(255, 255, 255, 0.05);
+    border-color: #fff;
+    color: #fff;
 }
 
 /* =========================================
-   4. البطاقات (Cards)
+   4. البطاقات (Obsidian Glass)
    ========================================= */
-.section { padding: 100px 8%; }
+.section { padding: 120px 8%; }
 
 .section-title {
     text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 60px;
+    font-size: 2.2rem;
+    font-weight: 200;
+    margin-bottom: 80px;
     color: #fff;
-    position: relative;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* خط تزييني تحت العنوان */
-.section-title::after {
-    content: '';
-    display: block;
-    width: 80px;
-    height: 4px;
-    background: var(--primary-gradient);
-    margin: 15px auto 0;
-    border-radius: 10px;
+    letter-spacing: 3px;
 }
 
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    gap: 40px;
 }
 
 .feature-card {
-    background: var(--card-bg);
-    padding: 40px 30px;
-    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%);
+    padding: 50px 30px;
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
     text-align: center;
-    transition: 0.3s;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: var(--shadow-card);
+    transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
 }
 
+/* تأثير التوهج عند التحويم */
 .feature-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--accent-color);
+    transform: translateY(-5px);
+    border-color: var(--cursed-light);
+    box-shadow: 0 10px 40px -10px rgba(124, 58, 237, 0.2);
 }
 
 .feature-card .icon {
-    font-size: 3rem;
-    background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 25px;
+    font-size: 2.5rem;
+    color: var(--cursed-light);
+    margin-bottom: 30px;
+    opacity: 0.8;
+    transition: 0.3s;
 }
 
+.feature-card:hover .icon { opacity: 1; text-shadow: 0 0 20px var(--cursed-glow); }
+
 .feature-card h3 {
-    margin-bottom: 15px;
-    font-size: 1.4rem;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    font-weight: 400;
     color: #fff;
 }
 
 .feature-card p {
-    color: var(--text-muted);
-    font-size: 0.95rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.8;
 }
 
 /* =========================================
-   5. الـ APIs (الحل النهائي + شكل VS Code)
+   5. الـ APIs (Technical Elegance)
    ========================================= */
-.dark-section { background: #0b1120; }
+.dark-section {
+    background: #000; /* أسود كامل للتباين */
+    position: relative;
+}
+
+/* خط فاصل أنيق */
+.dark-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 80%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+}
 
 .api-container {
-    max-width: 850px;
+    max-width: 900px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 40px;
 }
 
 .api-box {
-    background: #1e293b;
-    border-radius: 12px;
-    padding: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(10, 10, 12, 0.5);
+    border: 1px solid var(--border-subtle);
+    padding: 0; /* سنستخدم البادينغ الداخلي */
+    border-radius: 4px;
+    overflow: hidden; /* لاحتواء العناصر */
     transition: 0.3s;
 }
 
-.api-box:hover {
-    border-color: var(--accent-color);
-}
+.api-box:hover { border-color: var(--cursed-glow); }
 
 .api-header {
+    background: rgba(255, 255, 255, 0.02);
+    padding: 15px 25px;
+    border-bottom: 1px solid var(--border-subtle);
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-bottom: 15px;
 }
 
-.method.get {
-    background: rgba(16, 185, 129, 0.1);
-    color: #34d399; /* أخضر ناعم */
-    padding: 5px 12px;
-    border-radius: 6px;
-    font-weight: bold;
-    font-size: 0.85rem;
+.method {
     font-family: var(--font-code);
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    color: var(--cursed-light);
+    border: 1px solid var(--cursed-glow);
+    padding: 4px 10px;
+    border-radius: 2px;
 }
 
 .endpoint {
     font-family: var(--font-code);
     color: #fff;
-    font-weight: 600;
+    font-size: 1rem;
+    opacity: 0.9;
     direction: ltr;
 }
 
-/* --- صندوق الكود (VS Code Style) --- */
+.api-desc {
+    padding: 20px 25px 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* --- صندوق الكود (Black Monolith) --- */
 .code-block {
-    background: #0f172a; /* لون محرر الأكواد */
+    background: #050505;
+    margin: 20px 25px 25px;
     padding: 15px;
-    border-radius: 8px;
+    border: 1px solid #222;
+    border-radius: 2px;
     display: flex;
     align-items: center;
-    gap: 15px;
-    border: 1px solid #334155;
+    gap: 20px;
     direction: ltr;
 }
 
 .code-block code {
-    color: #cbd5e1;
+    color: #d8b4fe; /* لافندر باهت */
     font-family: var(--font-code);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     
-    /* خصائص منع الخروج عن الصندوق */
+    /* منع الكسر */
     white-space: nowrap;
     overflow-x: auto;
     flex-grow: 1;
     padding-bottom: 4px;
     
-    /* تخصيص السكرول */
-    scrollbar-width: thin;
-    scrollbar-color: #475569 #0f172a;
+    scrollbar-width: none; /* إخفاء السكرول بار للمظهر (سيعمل باللمس/الماوس) */
 }
-
-/* تلوين الرابط ليكون مميزاً */
-.code-block code {
-    color: #93c5fd; /* أزرق فاتح */
-}
+/* إظهار سكرول بار رفيع جداً عند الحاجة */
+.code-block code::-webkit-scrollbar { height: 2px; }
+.code-block code::-webkit-scrollbar-thumb { background: var(--cursed-glow); }
 
 .copy-btn {
     background: transparent;
     border: none;
-    color: #64748b;
+    color: #555;
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     transition: 0.3s;
-    flex-shrink: 0;
 }
 
-.copy-btn:hover { color: var(--accent-color); }
+.copy-btn:hover { color: #fff; }
 
 /* =========================================
    6. المطور والفوتر
    ========================================= */
 .dev-card {
-    background: linear-gradient(145deg, #1e293b, #0f172a);
-    padding: 50px;
-    border-radius: 20px;
     text-align: center;
-    max-width: 700px;
+    max-width: 600px;
     margin: 0 auto;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 60px 20px;
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
-.dev-info h2 { margin-bottom: 20px; color: #fff; }
+.dev-info h2 {
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
 
 .socials {
-    margin-top: 30px;
+    margin-top: 40px;
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
 }
 
 .socials a {
-    background: rgba(255, 255, 255, 0.05);
-    color: #fff;
-    padding: 12px 25px;
-    border-radius: 50px;
+    color: var(--text-secondary);
+    font-size: 1rem;
     transition: 0.3s;
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 10px;
 }
 
-.socials a:hover {
-    background: var(--primary-gradient);
-    transform: translateY(-3px);
-}
+.socials a i { font-size: 1.5rem; margin-bottom: 5px; }
+
+.socials a:hover { color: var(--cursed-light); transform: translateY(-3px); }
 
 footer {
     text-align: center;
-    padding: 40px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    margin-top: 60px;
-    color: var(--text-muted);
+    padding: 50px;
+    color: #333;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
 }
 
 /* موبايل */
 @media (max-width: 768px) {
-    header { padding: 15px 20px; }
+    header { padding: 20px; }
     .nav-links { display: none; }
     .hero h1 { font-size: 2.8rem; }
-    .feature-card { padding: 30px 20px; }
-    /* ضمان عمل السكرول في الموبايل */
-    .code-block code { font-size: 0.85rem; }
+    .feature-card { padding: 30px; }
+    .code-block { margin: 15px; padding: 10px; }
 }
